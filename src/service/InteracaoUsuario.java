@@ -43,16 +43,6 @@ public class InteracaoUsuario {
                 "Dezembro\n");
     }
 
-    public static String RetornoDeLivros(boolean emprestado){
-        System.out.println("\n" +
-        "Nome: Dom Quixote" + "Preço: R$45,00" + "Codigo: 1 \n" + "Emprestado:" + emprestado + "\n" +
-        "Nome: A Arte da Guerra " + "Preço: R$30,50 " + "Codigo: 2  " + "Emprestado:" + emprestado  + "\n" +
-         "Nome: 1984 " + "Preço: R$25,75 " + "Codigo: 3  \n" + emprestado);
-
-         return RetornoDeLivros(emprestado);
-         
-    }
-
     public List<CadastroCliente> requisitarDadosCliente(Scanner leitor, List<CadastroCliente> clientes) {
         System.out.println("Informe seu nome:");
         String nomeCliente = leitor.nextLine();
@@ -69,7 +59,7 @@ public class InteracaoUsuario {
         LocalDate dataNascimento = LocalDate.of(anoDeNascimento, mesDeNascimento, diaDeNascimento);
 
         System.out.println("Informe o CPF:");
-        int cpf = Integer.parseInt(leitor.nextLine());
+        long cpf = Long.valueOf(leitor.nextLine());
 
         System.out.println("Informe o endereço:");
         String endereco = leitor.nextLine();
@@ -79,8 +69,13 @@ public class InteracaoUsuario {
 
         return clientes;
     }
-
-    public void emprestarLivro(CadastroCliente cliente, CadastroLivro acervo, Biblioteca biblioteca) {
+    CadastroCliente cadastroCliente = new CadastroCliente(null, 0, null, null);
+    public void emprestarLivro(CadastroCliente cliente, CadastroLivro acervo, Biblioteca biblioteca, Scanner leitor, long cpf) {
+        System.out.println("Informe o CPF do cliente:");
+        String cpfvalidacao = leitor.nextLine();
+        cadastroCliente.validarCPF(cpfvalidacao);
+        System.out.println("Informe o código do livro:");
+        int codigoLivro = Integer.parseInt(scanner.nextLine());
         if (acervo.isEmprestado()) {
             System.out.println("Este livro já está emprestado.");
         } else {
@@ -88,6 +83,11 @@ public class InteracaoUsuario {
             acervo.setEmprestado(true);
             System.out.println("Livro emprestado com sucesso para " + cliente.getNomeCliente());
         }
+    }
+
+
+    private long toString(long cpf) {
+        return toString(cpf);
     }
 
     public void devolverLivro(CadastroCliente cliente, CadastroLivro acervo) {
@@ -99,4 +99,6 @@ public class InteracaoUsuario {
             System.out.println("Este livro não foi emprestado por " + cliente.getNomeCliente());
         }
     }
+
+    
 }

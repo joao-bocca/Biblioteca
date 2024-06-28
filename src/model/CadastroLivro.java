@@ -1,10 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class CadastroLivro {
     private String nomeLivro;
     private double preco;
     private int codigo;
     private boolean emprestado;
+    CadastroCliente cadastroCliente = new CadastroCliente(nomeLivro, codigo, nomeLivro, null);
+    private CadastroLivro[] livrosEmprestados;
 
     // Construtor para inicializar o nome, preço e código do produto
     public CadastroLivro(String nomeLivro, double preco, int codigo) {
@@ -13,6 +17,8 @@ public class CadastroLivro {
         this.codigo = codigo;
         this.emprestado = false;
     }
+
+
 
     // Método getter para obter o nome do produto
     public String getNomeLivro() {
@@ -39,6 +45,10 @@ public class CadastroLivro {
         this.emprestado = emprestado;
     }
 
+    public List<CadastroLivro> getLivrosEmprestados() {
+        return getLivrosEmprestados();
+    }
+
     // Método toString para retornar a representação em string do produto
     @Override
     public String toString() {
@@ -58,10 +68,23 @@ public class CadastroLivro {
         return new CadastroLivro[]{livro1, livro2, livro3};
     }
 
-    
+    public void listarLivrosEmprestados() {
+        System.out.println("Livros emprestados por " + cadastroCliente.getNomeCliente() + ":");
+        for (CadastroLivro livro : livrosEmprestados) {
+            System.out.println(livro.getNomeLivro());
+        }
+    }
+
+
 
     public void add(CadastroLivro acervo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        return;
     }
+
+    
+
+
+
+
+    
 }
